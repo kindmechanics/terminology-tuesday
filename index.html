@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminology Tuesday | Kind Mechanics</title>
+  <meta name="description" content="Plain-English reference cards for neurodiversity at work. Executive function, cognitive load, masking, context switching, and more. Free to share.">
+  <meta property="og:title" content="Terminology Tuesday | Kind Mechanics">
+  <meta property="og:description" content="Plain-English reference cards for neurodiversity at work. Free to share.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-teal: #153845;
+      --teal: #1A8A7D;
+      --light-teal: #E0F2F0;
+      --sand: #F5F0E8;
+      --warm-white: #FAFAF7;
+      --charcoal: #2D2D2D;
+      --dark-grey: #4A4A4A;
+      --med-grey: #7A7A7A;
+      --light-grey: #F5F5F5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* === HEADER === */
+    .header {
+      background: var(--dark-teal);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--teal), #22B8A0, var(--teal));
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 2.5rem;
+    }
+
+    .brand {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .header h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .header p {
+      font-size: 1.1rem;
+      color: #9DC5BE;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    /* === INTRO === */
+    .intro {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 1rem;
+    }
+
+    .intro p {
+      font-size: 1.05rem;
+      color: var(--dark-grey);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .intro p + p {
+      margin-top: 1rem;
+    }
+
+    .intro a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .intro a:hover {
+      color: var(--dark-teal);
+    }
+
+    /* === GRID === */
+    .grid-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 3rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .card:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card-footer {
+      padding: 0.9rem 1rem;
+      border-top: 1px solid var(--light-grey);
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--dark-teal);
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--med-grey);
+      margin-top: 0.25rem;
+      line-height: 1.45;
+    }
+
+    /* === LIGHTBOX === */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 42, 51, 0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      cursor: pointer;
+    }
+
+    .lightbox-overlay.active {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 1001;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    /* === NEWSLETTER SECTION === */
+    .newsletter-section {
+      background: var(--sand);
+      padding: 2.5rem 2rem;
+      margin-top: 1rem;
+    }
+
+    .newsletter-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .newsletter-section h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark-teal);
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .newsletter-list li a {
+      display: block;
+      padding: 0.9rem 1rem;
+      background: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--charcoal);
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-left: 3px solid var(--teal);
+      transition: background 0.15s, border-color 0.15s;
+      line-height: 1.4;
+    }
+
+    .newsletter-list li a:hover {
+      background: var(--light-teal);
+      border-left-color: var(--dark-teal);
+    }
+
+    .newsletter-list li a span {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--med-grey);
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+
+    /* === FOOTER === */
+    .footer {
+      background: var(--dark-teal);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: #9DC5BE;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .footer-sub {
+      font-size: 0.8rem;
+      color: #4A7A73;
+      margin-top: 0.5rem;
+    }
+
+    .footer-sub a {
+      color: var(--teal);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .footer-sub a:hover {
+      color: #22B8A0;
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 600px) {
+      .header-inner { padding: 2rem 1.25rem 2rem; }
+      .intro { padding: 2rem 1.25rem 0.5rem; }
+      .grid-section { padding: 1.5rem 1.25rem 2.5rem; }
+      .newsletter-section { padding: 2rem 1.25rem; }
+      .cards { grid-template-columns: 1fr; gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">Kind Mechanics</div>
+      <h1>Terminology Tuesday</h1>
+      <p>Plain-English reference cards for neurodiversity at work. Use them, share them, pin them in your team channel.</p>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p>These cards are designed to make neurodiversity concepts readable without turning them into jargon. Each one covers what the term means, why it matters at work, and what teams can change. They work best as quick-reference resources, not lecture material.</p>
+    <p>Click any card to view it full size. Right-click to save or share.</p>
+  </section>
+
+  <section class="grid-section">
+    <div class="cards">
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/cognitive-load.png" alt="Terminology Tuesday: Cognitive Load" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Cognitive Load</div>
+          <div class="card-desc">The total mental effort to process, hold context, and decide. Excess load impairs focus for ND folks first and everyone after.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/executive-function.png" alt="Terminology Tuesday: Executive Function" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Executive Function</div>
+          <div class="card-desc">The brain's management system. For ND folks, especially ADHD, it can be inconsistent rather than absent.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/context-switching.png" alt="Terminology Tuesday: Context Switching" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Context Switching</div>
+          <div class="card-desc">The mental effort to shift between tasks, tools, or topics. Each switch forces a rebuild. Some brains pay more per switch.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/masking.png" alt="Terminology Tuesday: Masking" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Masking</div>
+          <div class="card-desc">The extra effort to pass as neurotypical. Burns energy, hides real needs, delays support until burnout.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/spiky-profile.png" alt="Terminology Tuesday: Spiky Profile" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Spiky Profile</div>
+          <div class="card-desc">Big strengths, significant challenges, fluctuating access to capacity. Systems built for flat-line consistency misread this as unreliability.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/sensory-overload.png" alt="Terminology Tuesday: Sensory Overload" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Sensory Overload</div>
+          <div class="card-desc">When the brain receives more input than it can process. Offices are often built for tolerance, not for clear thinking.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/stimming.png" alt="Terminology Tuesday: Stimming" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Stimming</div>
+          <div class="card-desc">Self-stimulatory behaviours that help regulate focus, emotion, or sensory input. It is self-regulation, not distraction.</div>
+        </div>
+      </div>
+
+      <div class="card" onclick="openLightbox(this)">
+        <img src="images/rsd.png" alt="Terminology Tuesday: RSD (Rejection Sensitive Dysphoria)" loading="lazy">
+        <div class="card-footer">
+          <div class="card-title">Rejection Sensitive Dysphoria</div>
+          <div class="card-desc">Intense emotional pain triggered by perceived rejection, criticism, or failure. Often linked to ADHD. Give feedback with clarity, not vibes.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="newsletter-section">
+    <div class="newsletter-inner">
+      <h2>The Newsletter Series</h2>
+      <ul class="newsletter-list">
+        <li><a href="https://buttondown.com/kindmechanics/archive/the-taxman-cometh-for-your-attention/" target="_blank" rel="noopener">
+          The Taxman Cometh
+          <span>#1 &mdash; Sensory &amp; Space Debt</span>
+        </a></li>
+        <li><a href="https://buttondown.com/kindmechanics/archive/that-always-on-feeling-is-a-design-flaw/" target="_blank" rel="noopener">
+          That "Always On" Feeling Is a Design Flaw
+          <span>#2 &mdash; Time &amp; Attention Debt</span>
+        </a></li>
+        <li><a href="https://buttondown.com/kindmechanics/archive/dont-heat-the-room-light-the-path-practical-fixes/" target="_blank" rel="noopener">
+          Don't Heat the Room, Light the Path
+          <span>#3 &mdash; Communication Debt</span>
+        </a></li>
+        <li><a href="https://buttondown.com/kindmechanics/archive/shouting-go-long-is-not-the-solution/" target="_blank" rel="noopener">
+          Shouting "Go Long" Is Not the Solution
+          <span>#4 &mdash; Decision &amp; Policy Debt</span>
+        </a></li>
+        <li><a href="https://buttondown.com/kindmechanics/archive/every-click-has-a-cost/" target="_blank" rel="noopener">
+          Every Click Has a Cost
+          <span>#5 &mdash; Design / UX Debt</span>
+        </a></li>
+        <li><a href="https://buttondown.com/kindmechanics/archive/when-is-a-glass-not-just-a-glass/" target="_blank" rel="noopener">
+          When Is a Glass Not Just a Glass?
+          <span>#6 &mdash; Causal Depth Perception</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">Kind Mechanics</div>
+    <div class="footer-tagline">Clarity as the Standard. Kindness as the System. Usefulness as the Goal.</div>
+    <div class="footer-sub">Human-readable by default. <a href="https://buttondown.com/kindmechanics" target="_blank" rel="noopener">Subscribe</a></div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector('img');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>
